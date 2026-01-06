@@ -1,1 +1,2 @@
-cfqt-url.sh
+#!/usr/bin/env bash
+exec cfqt-url.sh "$@"

@@ -94,7 +94,7 @@ python3.10 -m venv "$SERVICEPORTAL_VENV"
     --no-cache-dir -r /opt/ai-dock/fastapi/requirements.txt
 
 # Get Cloudflare daemon
-wget -c -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+wget -c -O cloudflared.deb -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 dpkg -i cloudflared.deb
 rm cloudflared.deb
 
@@ -123,7 +123,7 @@ touch /etc/rclone/rclone.conf
 
 export SYNCTHING_VERSION="$(curl -fsSL "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
-env-store SYNCTHING_VERSION
+  env-store SYNCTHING_VERSION
 
 SYNCTHING_URL="https://github.com/syncthing/syncthing/releases/download/v${SYNCTHING_VERSION}/syncthing-linux-amd64-v${SYNCTHING_VERSION}.tar.gz"
 mkdir /opt/syncthing/

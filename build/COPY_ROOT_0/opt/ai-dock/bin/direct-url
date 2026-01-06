@@ -1,1 +1,2 @@
-direct-url.sh
+#!/usr/bin/env bash
+exec direct-url.sh "$@"

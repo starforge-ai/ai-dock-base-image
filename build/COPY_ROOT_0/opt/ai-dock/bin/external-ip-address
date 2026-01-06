@@ -1,1 +1,2 @@
-external-ip-address.sh
+#!/usr/bin/env bash
+exec external-ip-address.sh "$@"
