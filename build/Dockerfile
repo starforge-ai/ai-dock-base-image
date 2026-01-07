@@ -1,21 +1,21 @@
 
-    ARG IMAGE_BASE="nvidia/cuda:13.1.0-base-ubuntu22.04"
+ARG IMAGE_BASE="nvidia/cuda:13.1.0-base-ubuntu24.04"
 
 # Caddy build
-FROM ubuntu:22.04 AS caddybuilder
+FROM ubuntu:24.04 AS caddybuilder
 
 ENV PATH=/opt/go/bin:$PATH
 ENV GOROOT=/opt/go
 RUN apt-get update && \
     apt-get install -y wget && \
-    wget https://dl.google.com/go/go1.22.4.linux-amd64.tar.gz && \
-    tar -xf go1.22.4.linux-amd64.tar.gz && \
+    wget https://dl.google.com/go/go1.25.5.linux-amd64.tar.gz && \
+    tar -xf go1.25.5.linux-amd64.tar.gz && \
     mv ./go /opt && \ 
     wget https://github.com/caddyserver/xcaddy/releases/download/v0.4.5/xcaddy_0.4.5_linux_amd64.deb && \
     apt-get install ./xcaddy_0.4.5_linux_amd64.deb && \
     xcaddy build \
-        --with github.com/caddyserver/caddy/v2=github.com/ai-dock/caddy/v2@httpredirect \
-        --with github.com/caddyserver/replace-response && \
+    --with github.com/caddyserver/caddy/v2=github.com/ai-dock/caddy/v2@httpredirect \
+    --with github.com/caddyserver/replace-response && \
     mkdir -p /opt/caddy/bin && \
     mkdir -p /opt/caddy/tls && \
     mv ./caddy /opt/caddy/bin  
@@ -35,7 +35,7 @@ COPY --from=caddybuilder /opt/caddy/ /opt/caddy/
 ARG XPU_TARGET="NVIDIA_GPU" # GPU_AMD, CPU
 ENV XPU_TARGET=${XPU_TARGET}
 
-ARG NODE_VERSION=v22.2.0
+ARG NODE_VERSION=v25.2.1
 ENV NODE_VERSION=${NODE_VERSION}
 
 LABEL org.opencontainers.image.source=https://github.com/ai-dock/base-image
@@ -54,8 +54,6 @@ ENV USER_NAME=user
 ENV USER_PASSWORD=password
 ENV USER_GROUPS=users,ai-dock,adm,sudo,audio,video,tty,cdrom,dialout,dip,fax,floppy,lp,plugdev,ssl-cert,sudo,tape,voice
 ENV DEBIAN_FRONTEND=noninteractive
-#ENV UCF_FORCE_CONFFNEW=1
-#ENV NEEDRESTART_MODE=a
 ENV PATH=/opt/ai-dock/bin:/opt/caddy/bin:$PATH
 ENV OPT_SYNC=
 ENV PYTHONUNBUFFERED=true
@@ -74,21 +72,10 @@ COPY --chown=0:1111 ./COPY_ROOT_0/ /
 ARG CUDA_STRING="13.1.0-base"
 ARG ROCM_STRING
 
-# RUN printf '#!/bin/sh\nexit 101\n' > /usr/sbin/policy-rc.d \
-#  && chmod +x /usr/sbin/policy-rc.d \
-#  && ln -sf /bin/true /usr/bin/systemctl \
-#  && ln -sf /bin/true /usr/sbin/service \
-#  && ln -sf /bin/true /usr/sbin/invoke-rc.d
-
 # Use build scripts to ensure we can build all targets from one Dockerfile in a single layer.
 # Don't put anything heavy in here - We can use multi-stage building above if necessary.
 #RUN yes | unminimize && \
 RUN set -eo pipefail && /opt/ai-dock/bin/build/layer0/init.sh | tee /var/log/build.log
-
-# RUN rm -f /usr/sbin/policy-rc.d \
-#  && rm -f /usr/bin/systemctl \
-#  && rm -f /usr/sbin/service \
-#  && rm -f /usr/sbin/invoke-rc.d
 
 # Keep init.sh as-is and place additional logic in /opt/ai-dock/bin/preflight.d
 CMD ["init.sh"]

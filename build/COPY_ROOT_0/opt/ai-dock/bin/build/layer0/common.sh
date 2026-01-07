@@ -43,18 +43,18 @@ $APT_INSTALL \
     less \
     libcap2-bin \
     libelf1 \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libtcmalloc-minimal4 \
     locales \
     lsb-release \
     lsof \
     man \
-    mlocate \
     net-tools \
     nano \
     openssh-server \
     pkg-config \
+    plocate \
     psmisc \
     python3-full \
     python3-pip \
@@ -91,7 +91,7 @@ apt update
 locale-gen en_US.UTF-8
 
 # Install 
-python3.10 -m venv "$SERVICEPORTAL_VENV"
+python3 -m venv "$SERVICEPORTAL_VENV"
 "$SERVICEPORTAL_VENV_PIP" install \
     --no-cache-dir -r /opt/ai-dock/fastapi/requirements.txt
 

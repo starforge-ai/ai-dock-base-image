@@ -6,7 +6,7 @@ on:
   #  branches: [ "main" ]
 
 env:
-  UBUNTU_VERSION: 22.04
+  UBUNTU_VERSION: 24.04
   BUILDX_NO_DEFAULT_ATTESTATIONS: 1
 
 jobs:
