@@ -67,7 +67,6 @@ $APT_INSTALL \
     sox \
     ssl-cert \
     sudo \
-    supervisor \
     tmux \
     tzdata \
     unar \
@@ -78,6 +77,9 @@ $APT_INSTALL \
     xz-utils \
     zip \
     zstd
+
+$APT_INSTALL -o Dpkg::Options::="--force-confold" \
+  supervisor    
     
 ln -sf $(ldconfig -p | grep -Po "libtcmalloc_minimal.so.\d" | head -n 1) \
         /lib/x86_64-linux-gnu/libtcmalloc.so
