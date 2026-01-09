@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description="Require port and service name",
 parser.add_argument("-p", "--port", action="store", help="listen port", required="True", type=int)
 args = parser.parse_args()
 
-base_dir = "/opt/ai-dock/fastapi/serviceportal/"
+base_dir = "/opt/starforge-ai/fastapi/serviceportal/"
 
 app = FastAPI()
 
@@ -192,7 +192,7 @@ def get_logs_context():
         "cloud": os.environ.get('CLOUD_PROVIDER')
     }
 
-@app.websocket("/ai-dock/logtail.sh")
+@app.websocket("/starforge-ai/logtail.sh")
 async def websocket_endpoint_log(websocket: WebSocket) -> None:
     last_logs = []
     await websocket.accept()

@@ -8,7 +8,7 @@ absolute_stored_file=$(realpath "$stored_file")
 stored_file_parent_dir=$(realpath --relative-to="$storage_dir" "$(dirname "$stored_file")")
 
 # Simplify per-image settings by keeping mappings separate
-source /opt/ai-dock/storage_monitor/etc/mappings.sh
+source /opt/starforge-ai/storage_monitor/etc/mappings.sh
 
 # Function to create symlinks for a given file and repository directory
 manage_symlinks() {

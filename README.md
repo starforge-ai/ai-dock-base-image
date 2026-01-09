@@ -1,4 +1,4 @@
-[![Docker Build](https://github.com/ai-dock/base-image/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ai-dock/base-image/actions/workflows/docker-build.yml)
+[![Docker Build](https://github.com/starforge-ai/base-image/actions/workflows/docker-build.yml/badge.svg)](https://github.com/starforge-ai/base-image/actions/workflows/docker-build.yml)
 
 # Base Image
 
@@ -10,7 +10,7 @@ This file should form the basis for the README.md for all extended images, with 
 
 All AI-Dock containers share a common base which is designed to make running on container-first cloud services such as [vast.ai](https://link.ai-dock.org/vast.ai) as straightforward and user friendly as possible.
 
-Common features and options are documented in the [base wiki](https://github.com/ai-dock/base-image/wiki) but any additional features unique to this image will be detailed below.
+Common features and options are documented in the [base wiki](https://github.com/starforge-ai/base-image/wiki) but any additional features unique to this image will be detailed below.
 
 ## Pre-built Images
 
@@ -32,7 +32,7 @@ ROCm builds are experimental. Please give feedback.
 ##### _CPU_
 `:v2-cpu-[ubuntu-version]`
 
-Browse [here](https://github.com/ai-dock/base-image/pkgs/container/base-image) for an image suitable for your target environment.
+Browse [here](https://github.com/starforge-ai/base-image/pkgs/container/base-image) for an image suitable for your target environment.
 
 ---
 

@@ -51,7 +51,7 @@
     }
     
     @preauth {
-        path /ai-dock/pre-auth
+        path /starforge-ai/pre-auth
     }
     
     @default {
@@ -63,7 +63,7 @@
         file_server
     }
         
-    respond /ai-dock/health-check 200
+    respond /starforge-ai/health-check 200
 }
 
 #####

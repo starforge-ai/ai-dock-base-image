@@ -9,7 +9,7 @@
 <li id="cfqt-{{ context.port }}">
     <a href="#_" 
         hx-post="/quicktunnel"
-        hx-vals='{"port": "{{ context.port }}", "path": "/ai-dock/pre-auth?token={{ context.auth_token }}" }'
+        hx-vals='{"port": "{{ context.port }}", "path": "/starforge-ai/pre-auth?token={{ context.auth_token }}" }'
         hx-trigger="click, every 15s"
         hx-target="#cfqt-{{ context.port }}"
         hx-swap="outerHTML"

@@ -26,7 +26,7 @@ parser.add_argument("-u", "--urlslug", action="store", help="image slug", type=s
 args = parser.parse_args()
 
 # set path and log file name
-base_dir = "/opt/ai-dock/fastapi/logviewer/"
+base_dir = "/opt/starforge-ai/fastapi/logviewer/"
 
 # create fastapi instance
 app = FastAPI()
@@ -53,7 +53,7 @@ async def log_reader(n=args.numlines) -> list:
                 log_lines.append(f"{line}<br/>")
         return log_lines
 
-@app.websocket("/ai-dock/logtail.sh")
+@app.websocket("/starforge-ai/logtail.sh")
 async def websocket_endpoint_log(websocket: WebSocket) -> None:
     last_logs = []
     await websocket.accept()

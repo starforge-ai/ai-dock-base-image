@@ -2,7 +2,7 @@
 
 storage_dir="$(readlink -f ${WORKSPACE}/storage)"
 image_storage_dir="$(readlink -f /opt/storage)"
-source /opt/ai-dock/storage_monitor/etc/mappings.sh
+source /opt/starforge-ai/storage_monitor/etc/mappings.sh
 # Link files bundled in the image to $storage_dir
 if [[ -d $image_storage_dir && "$(readlink -f $image_storage_dir)" != "$(readlink -f $storage_dir)" ]]; then
     IFS=$'\n'
@@ -20,7 +20,7 @@ else
 fi
 
 # Initial pass for existing files
-find "$storage_dir" -exec bash /opt/ai-dock/storage_monitor/bin/manage-symlinks.sh "$storage_dir" {} \;
+find "$storage_dir" -exec bash /opt/starforge-ai/storage_monitor/bin/manage-symlinks.sh "$storage_dir" {} \;
 
 # Delete any broken symlinks caused by containers sharing a volume
 for app_directory in "${!storage_map[@]}"; do
@@ -39,5 +39,5 @@ do
     event_type=$(echo "$changed_item" | awk '{print $1}')
     stored_file=$(echo "$changed_item" | awk '{print $2}')
     # Call the function to create or remove symlinks for the changed item
-    bash /opt/ai-dock/storage_monitor/bin/manage-symlinks.sh "$storage_dir" "$stored_file" "$event_type"
+    bash /opt/starforge-ai/storage_monitor/bin/manage-symlinks.sh "$storage_dir" "$stored_file" "$event_type"
 done

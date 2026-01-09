@@ -14,9 +14,9 @@
     logger = document.getElementById("terminal");
     logger.start = function () {
         if (location.protocol != "https:") {
-            ws_url = "ws://" + location.host + "/ai-dock/logtail.sh";
+            ws_url = "ws://" + location.host + "/starforge-ai/logtail.sh";
         } else {
-            ws_url = "wss://" + location.host + "/ai-dock/logtail.sh";
+            ws_url = "wss://" + location.host + "/starforge-ai/logtail.sh";
         }
         let ws_log = new WebSocket(ws_url);
         let status = document.getElementById("status");

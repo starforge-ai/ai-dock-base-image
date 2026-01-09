@@ -93,7 +93,7 @@ locale-gen en_US.UTF-8
 # Install 
 python3 -m venv "$SERVICEPORTAL_VENV"
 "$SERVICEPORTAL_VENV_PIP" install \
-    --no-cache-dir -r /opt/ai-dock/fastapi/requirements.txt
+    --no-cache-dir -r /opt/starforge-ai/fastapi/requirements.txt
 
 # Get Cloudflare daemon
 wget -c -O cloudflared.deb -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
@@ -131,7 +131,7 @@ SYNCTHING_URL="https://github.com/syncthing/syncthing/releases/download/v${SYNCT
 mkdir /opt/syncthing/
 wget -O /opt/syncthing.tar.gz $SYNCTHING_URL && (cd /opt && tar -zxf syncthing.tar.gz -C /opt/syncthing/ --strip-components=1) && rm -f /opt/syncthing.tar.gz
 if [[ -f /opt/syncthing/syncthing ]]; then
-    ln -s /opt/syncthing/syncthing /opt/ai-dock/bin/syncthing
+    ln -s /opt/syncthing/syncthing /opt/starforge-ai/bin/syncthing
 else
     echo "Failed to fetch syncthing. Exiting build"
     exit 1
@@ -146,11 +146,11 @@ nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION
 
 # Ensure correct environment for child builds
-printf "source %s/nvm.sh\n" "$NVM_DIR" >> /opt/ai-dock/etc/environment.sh
-printf "source %s/bash_completion\n" "$NVM_DIR" >> /opt/ai-dock/etc/environment.sh
-printf "source /opt/ai-dock/etc/environment.sh\n" >> /etc/profile.d/02-ai-dock.sh
-printf "source /opt/ai-dock/etc/environment.sh\n" >> /etc/bash.bashrc
+printf "source %s/nvm.sh\n" "$NVM_DIR" >> /opt/starforge-ai/etc/environment.sh
+printf "source %s/bash_completion\n" "$NVM_DIR" >> /opt/starforge-ai/etc/environment.sh
+printf "source /opt/starforge-ai/etc/environment.sh\n" >> /etc/profile.d/02-ai-dock.sh
+printf "source /opt/starforge-ai/etc/environment.sh\n" >> /etc/bash.bashrc
 printf "ready-test\n" >> /root/.bashrc
 
 # Give our runtime user full access (added to ai-dock group)
-/opt/ai-dock/bin/fix-permissions.sh -o container
+/opt/starforge-ai/bin/fix-permissions.sh -o container
