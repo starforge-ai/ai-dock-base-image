@@ -371,7 +371,7 @@ function init_toggle_supervisor_autostart() {
 
 function init_create_directories() {
     mkdir -m 2770 -p /run/http_ports
-    chown root.ai-dock /run/http_ports
+    chown root:ai-dock /run/http_ports
     mkdir -p /opt/caddy/etc
 }
 
