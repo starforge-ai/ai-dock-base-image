@@ -1,5 +1,5 @@
 
-ARG IMAGE_BASE="nvidia/cuda:12.9.1-base-ubuntu24.04"
+ARG IMAGE_BASE="nvidia/cuda:13.0.2-base-ubuntu24.04"
 
 # Caddy build
 FROM ubuntu:24.04 AS caddybuilder
@@ -69,7 +69,7 @@ ENV IMAGE_SLUG="base-image"
 # Copy early so we can use scripts in the build - Changes to these files will invalidate the cache and cause a rebuild.
 COPY --chown=0:1111 ./COPY_ROOT_0/ /
 
-ARG CUDA_STRING="12.9.1-base"
+ARG CUDA_STRING
 ARG ROCM_STRING
 
 # Use build scripts to ensure we can build all targets from one Dockerfile in a single layer.

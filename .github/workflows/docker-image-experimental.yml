@@ -56,9 +56,8 @@ jobs:
       matrix:
         cuda:
           - 13.1.0
+          - 13.0.2
           - 12.9.1
-          - 12.1.0
-          - 12.2.0
         level:
           - "base"
           - "runtime"
@@ -66,9 +65,9 @@ jobs:
           - "cudnn8-runtime"
           - "cudnn8-devel"
         exclude:
-          - cuda: 12.2.0
+          - cuda: 13.1.0
             level: "cudnn8-runtime" # Not yet available
-          - cuda: 12.2.0
+          - cuda: 13.1.0
             level: "cudnn8-devel" # Not yet available
     steps:
       - name: Env Setter

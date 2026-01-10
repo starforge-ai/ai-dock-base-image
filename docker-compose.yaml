@@ -5,15 +5,15 @@ services:
       context: ./build
       args:
         # Remove as appropriate
-        IMAGE_BASE: ${IMAGE_BASE:-nvidia/cuda:12.9.1-base-ubuntu24.04}
-        IMAGE_TAG: ${IMAGE_TAG:-v2-cuda-12.9.1-runtime-24.04}
+        IMAGE_BASE: ${IMAGE_BASE:-nvidia/cuda:13.0.2-base-ubuntu24.04}
+        IMAGE_TAG: ${IMAGE_TAG:-v2-cuda-13.0.2-runtime-24.04}
         XPU_TARGET: ${XPU_TARGET:-NVIDIA_GPU}
-        CUDA_STRING: ${CUDA_STRING:-12.9.1-base}
+        CUDA_STRING: ${CUDA_STRING:-13.0.2-base}
         ROCM_STRING: ${ROCM_STRING:-7.0.3-runtime}
       tags:
-        - "ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-12.9.1-base-24.04}"
+        - "ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}"
 
-    image: ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-12.9.1-base-24.04}
+    image: ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}
 
     ## For Nvidia GPU's - You probably want to uncomment this
     #deploy:

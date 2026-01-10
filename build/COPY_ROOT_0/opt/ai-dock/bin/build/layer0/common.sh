@@ -1,7 +1,7 @@
 #!/bin/false
 
 groupadd -g 1111 ai-dock
-chown root.ai-dock /opt
+chown root:ai-dock /opt
 chmod g+w /opt
 chmod g+s /opt
 
@@ -113,7 +113,7 @@ rm -f /etc/update-motd.d/10-help-text
 # Ensure critical paths/files are present
 mkdir -p --mode=0755 /etc/apt/keyrings
 mkdir -p --mode=0755 /run/sshd
-chown -R root.ai-dock /var/log
+chown -R root:ai-dock /var/log
 chmod -R g+w /var/log
 chmod -R g+s /var/log
 mkdir -p /var/log/supervisor
@@ -125,7 +125,7 @@ touch /etc/rclone/rclone.conf
 
 export SYNCTHING_VERSION="$(curl -fsSL "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
-  env-store SYNCTHING_VERSION
+env-store SYNCTHING_VERSION
 
 SYNCTHING_URL="https://github.com/syncthing/syncthing/releases/download/v${SYNCTHING_VERSION}/syncthing-linux-amd64-v${SYNCTHING_VERSION}.tar.gz"
 mkdir /opt/syncthing/
