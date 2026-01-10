@@ -1,2 +1,1 @@
-#!/usr/bin/env bash
-exec ready-test.sh "$@"
+ready-test.sh
