@@ -1,4 +1,4 @@
-Container based on ghcr.io/ai-dock/base-image (https://github.com/ai-dock/base-image)
+Container based on ghcr.io/starforge-ai/base-image (https://github.com/starforge-ai/base-image)
 
 All running services are managed by supervisord. 
 You can use supervisorctl to view, start and stop them.

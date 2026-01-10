@@ -1,1 +1,2 @@
-env-store.sh
+#!/usr/bin/env bash
+exec env-store.sh "$@"

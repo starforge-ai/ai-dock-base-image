@@ -192,7 +192,7 @@ def get_logs_context():
         "cloud": os.environ.get('CLOUD_PROVIDER')
     }
 
-@app.websocket("/ai-dock/logtail.sh")
+@app.websocket("/starforge-ai/logtail.sh")
 async def websocket_endpoint_log(websocket: WebSocket) -> None:
     last_logs = []
     await websocket.accept()

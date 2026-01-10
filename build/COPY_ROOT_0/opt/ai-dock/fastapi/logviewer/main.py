@@ -53,7 +53,7 @@ async def log_reader(n=args.numlines) -> list:
                 log_lines.append(f"{line}<br/>")
         return log_lines
 
-@app.websocket("/ai-dock/logtail.sh")
+@app.websocket("/starforge-ai/logtail.sh")
 async def websocket_endpoint_log(websocket: WebSocket) -> None:
     last_logs = []
     await websocket.accept()

@@ -43,18 +43,18 @@ $APT_INSTALL \
     less \
     libcap2-bin \
     libelf1 \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libtcmalloc-minimal4 \
     locales \
     lsb-release \
     lsof \
     man \
-    mlocate \
     net-tools \
     nano \
     openssh-server \
     pkg-config \
+    plocate \
     psmisc \
     python3-full \
     python3-pip \
@@ -67,7 +67,6 @@ $APT_INSTALL \
     sox \
     ssl-cert \
     sudo \
-    supervisor \
     tmux \
     tzdata \
     unar \
@@ -78,6 +77,9 @@ $APT_INSTALL \
     xz-utils \
     zip \
     zstd
+
+$APT_INSTALL -o Dpkg::Options::="--force-confold" \
+  supervisor    
     
 ln -sf $(ldconfig -p | grep -Po "libtcmalloc_minimal.so.\d" | head -n 1) \
         /lib/x86_64-linux-gnu/libtcmalloc.so
@@ -89,12 +91,12 @@ apt update
 locale-gen en_US.UTF-8
 
 # Install 
-python3.10 -m venv "$SERVICEPORTAL_VENV"
+python3 -m venv "$SERVICEPORTAL_VENV"
 "$SERVICEPORTAL_VENV_PIP" install \
     --no-cache-dir -r /opt/ai-dock/fastapi/requirements.txt
 
 # Get Cloudflare daemon
-wget -c -O cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+wget -c -O cloudflared.deb -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 dpkg -i cloudflared.deb
 rm cloudflared.deb
 
@@ -123,7 +125,7 @@ touch /etc/rclone/rclone.conf
 
 export SYNCTHING_VERSION="$(curl -fsSL "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
-env-store SYNCTHING_VERSION
+  env-store SYNCTHING_VERSION
 
 SYNCTHING_URL="https://github.com/syncthing/syncthing/releases/download/v${SYNCTHING_VERSION}/syncthing-linux-amd64-v${SYNCTHING_VERSION}.tar.gz"
 mkdir /opt/syncthing/

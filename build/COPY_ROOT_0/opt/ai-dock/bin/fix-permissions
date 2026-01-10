@@ -1,1 +1,2 @@
-fix-permissions.sh
+#!/usr/bin/env bash
+exec fix-permissions.sh "$@"

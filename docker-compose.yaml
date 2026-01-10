@@ -5,16 +5,16 @@ services:
       context: ./build
       args:
         # Remove as appropriate
-        IMAGE_BASE: ${IMAGE_BASE:-nvidia/cuda:11.8.0-base-ubuntu22.04}
-        IMAGE_TAG: ${IMAGE_TAG:-v2-cuda-11.8.0-runtime-22.04}
+        IMAGE_BASE: ${IMAGE_BASE:-nvidia/cuda:13.0.2-base-ubuntu24.04}
+        IMAGE_TAG: ${IMAGE_TAG:-v2-cuda-13.0.2-runtime-24.04}
         XPU_TARGET: ${XPU_TARGET:-NVIDIA_GPU}
-        CUDA_STRING: ${CUDA_STRING:-11.8.0-base}
-        ROCM_STRING: ${ROCM_STRING:-5.7-runtime}
+        CUDA_STRING: ${CUDA_STRING:-13.0.2-base}
+        ROCM_STRING: ${ROCM_STRING:-7.0.3-runtime}
       tags:
-        - "ghcr.io/ai-dock/base-image:${IMAGE_TAG:-v2-cuda-11.8.0-base-22.04}"
-        
-    image: ghcr.io/ai-dock/base-image:${IMAGE_TAG:-v2-cuda-11.8.0-base-22.04}
-    
+        - "ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}"
+
+    image: ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}
+
     ## For Nvidia GPU's - You probably want to uncomment this
     #deploy:
     #  resources:
@@ -23,13 +23,13 @@ services:
     #        - driver: nvidia
     #          count: all
     #          capabilities: [gpu]
-    
-    
+
+
     devices:
       - "/dev/dri:/dev/dri"
       # For AMD GPU
       #- "/dev/kfd:/dev/kfd"
-      
+
     volumes:
       # Workspace
       - ./workspace:${WORKSPACE:-/workspace}:rshared
@@ -40,36 +40,36 @@ services:
       # TLS Certificates
       - ./config/tls/container.crt:/opt/caddy/tls/container.crt
       - ./config/tls/container.key:/opt/caddy/tls/container.key
-      
+
     ports:
-        # SSH available on host machine port 2222 to avoid conflict. Change to suit
-        - ${SSH_PORT_HOST:-2222}:22
-        # Syncthing
-        - ${SYNCTHING_UI_PORT_HOST:-8384}:${SYNCTHING_UI_PORT_HOST:-8384}
-        - ${SYNCTHING_TRANSPORT_PORT_HOST:-22999}:${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
-        # Caddy port for service portal
-        - ${SERVICEPORTAL_PORT_HOST:-1111}:${SERVICEPORTAL_PORT_HOST:-1111}
+      # SSH available on host machine port 2222 to avoid conflict. Change to suit
+      - ${SSH_PORT_HOST:-2222}:22
+      # Syncthing
+      - ${SYNCTHING_UI_PORT_HOST:-8384}:${SYNCTHING_UI_PORT_HOST:-8384}
+      - ${SYNCTHING_TRANSPORT_PORT_HOST:-22999}:${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
+      # Caddy port for service portal
+      - ${SERVICEPORTAL_PORT_HOST:-1111}:${SERVICEPORTAL_PORT_HOST:-1111}
 
     environment:
-        # Important: Edit values in .env - not here.
-        # Don't enclose values in quotes
-        - DIRECT_ADDRESS=${DIRECT_ADDRESS:-127.0.0.1}
-        - DIRECT_ADDRESS_GET_WAN=${DIRECT_ADDRESS_GET_WAN:-false}
-        - WORKSPACE=${WORKSPACE:-/workspace}
-        - WORKSPACE_SYNC=${WORKSPACE_SYNC:-false}
-        - CADDY_AUTH_COOKIE_NAME=${CADDY_AUTH_COOKIE_NAME:-}
-        - CF_TUNNEL_TOKEN=${CF_TUNNEL_TOKEN:-}
-        - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-true}
-        - WEB_ENABLE_AUTH=${WEB_ENABLE_AUTH:-true}
-        - WEB_ENABLE_HTTPS=${WEB_ENABLE_HTTPS:-false}
-        - WEB_USER=${WEB_USER:-user}
-        - WEB_PASSWORD=${WEB_PASSWORD:-password}
-        - SERVERLESS=${SERVERLESS:-false}
-        - SYNCTHING_UI_PORT_HOST=${SYNCTHING_UI_PORT_HOST:-8384}
-        - SYNCTHING_URL=${SYNCTHING_URL:-}
-        - SYNCTHING_TRANSPORT_PORT_HOST=${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
-        - SSH_PORT_HOST=${SSH_PORT_HOST:-2222}
-        - SERVICEPORTAL_PORT_HOST=${SERVICEPORTAL_PORT_HOST:-1111}
-        - SERVICEPORTAL_METRICS_PORT=${SERVICEPORTAL_METRICS_PORT:-21111}
-        - SERVICEPORTAL_URL=${SERVICEPORTAL_URL:-}
-        #- PROVISIONING_SCRIPT=https://raw.githubusercontent.com/ai-dock/base-image/main/config/provisioning/default.sh
+      # Important: Edit values in .env - not here.
+      # Don't enclose values in quotes
+      - DIRECT_ADDRESS=${DIRECT_ADDRESS:-127.0.0.1}
+      - DIRECT_ADDRESS_GET_WAN=${DIRECT_ADDRESS_GET_WAN:-false}
+      - WORKSPACE=${WORKSPACE:-/workspace}
+      - WORKSPACE_SYNC=${WORKSPACE_SYNC:-false}
+      - CADDY_AUTH_COOKIE_NAME=${CADDY_AUTH_COOKIE_NAME:-}
+      - CF_TUNNEL_TOKEN=${CF_TUNNEL_TOKEN:-}
+      - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-true}
+      - WEB_ENABLE_AUTH=${WEB_ENABLE_AUTH:-true}
+      - WEB_ENABLE_HTTPS=${WEB_ENABLE_HTTPS:-false}
+      - WEB_USER=${WEB_USER:-user}
+      - WEB_PASSWORD=${WEB_PASSWORD:-password}
+      - SERVERLESS=${SERVERLESS:-false}
+      - SYNCTHING_UI_PORT_HOST=${SYNCTHING_UI_PORT_HOST:-8384}
+      - SYNCTHING_URL=${SYNCTHING_URL:-}
+      - SYNCTHING_TRANSPORT_PORT_HOST=${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
+      - SSH_PORT_HOST=${SSH_PORT_HOST:-2222}
+      - SERVICEPORTAL_PORT_HOST=${SERVICEPORTAL_PORT_HOST:-1111}
+      - SERVICEPORTAL_METRICS_PORT=${SERVICEPORTAL_METRICS_PORT:-21111}
+      - SERVICEPORTAL_URL=${SERVICEPORTAL_URL:-}
+      #- PROVISIONING_SCRIPT=https://raw.githubusercontent.com/starforge-ai/base-image/main/config/provisioning/default.sh

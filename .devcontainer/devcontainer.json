@@ -1,0 +1,17 @@
+{
+  "name": "AI Dock Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "privileged": true,
+  "overrideCommand": false,
+  "containerUser": "root",
+  "remoteUser": "root",
+  "updateRemoteUserUID": false,
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "mounts": [
+    "source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
+  ]
+}
