@@ -8,7 +8,7 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     
     if [[ -z $PROC_NUM ]]; then
         # Something has gone awry, but no retry

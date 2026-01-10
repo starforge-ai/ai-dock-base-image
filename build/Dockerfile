@@ -1,5 +1,5 @@
 
-ARG IMAGE_BASE="nvidia/cuda:13.1.0-base-ubuntu24.04"
+ARG IMAGE_BASE="nvidia/cuda:12.9.1-base-ubuntu24.04"
 
 # Caddy build
 FROM ubuntu:24.04 AS caddybuilder
@@ -14,7 +14,7 @@ RUN apt-get update && \
     wget https://github.com/caddyserver/xcaddy/releases/download/v0.4.5/xcaddy_0.4.5_linux_amd64.deb && \
     apt-get install ./xcaddy_0.4.5_linux_amd64.deb && \
     xcaddy build \
-    --with github.com/caddyserver/caddy/v2=github.com/starforge-ai/caddy/v2@httpredirect \
+    --with github.com/caddyserver/caddy/v2=github.com/ai-dock/caddy/v2@httpredirect \
     --with github.com/caddyserver/replace-response && \
     mkdir -p /opt/caddy/bin && \
     mkdir -p /opt/caddy/tls && \
@@ -31,7 +31,7 @@ ENV LD_LIBRARY_PATH=
 
 COPY --from=caddybuilder /opt/caddy/ /opt/caddy/
 
-# Determines which scripts at /opt/starforge-ai/bin/build/layerX will be run by init.sh
+# Determines which scripts at /opt/ai-dock/bin/build/layerX will be run by init.sh
 ARG XPU_TARGET="NVIDIA_GPU" # GPU_AMD, CPU
 ENV XPU_TARGET=${XPU_TARGET}
 
@@ -54,7 +54,7 @@ ENV USER_NAME=user
 ENV USER_PASSWORD=password
 ENV USER_GROUPS=users,ai-dock,adm,sudo,audio,video,tty,cdrom,dialout,dip,fax,floppy,lp,plugdev,ssl-cert,sudo,tape,voice
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH=/opt/starforge-ai/bin:/opt/caddy/bin:$PATH
+ENV PATH=/opt/ai-dock/bin:/opt/caddy/bin:$PATH
 ENV OPT_SYNC=
 ENV PYTHONUNBUFFERED=true
 ENV VENV_DIR=/opt/environments/python
@@ -69,13 +69,13 @@ ENV IMAGE_SLUG="base-image"
 # Copy early so we can use scripts in the build - Changes to these files will invalidate the cache and cause a rebuild.
 COPY --chown=0:1111 ./COPY_ROOT_0/ /
 
-ARG CUDA_STRING="13.1.0-base"
+ARG CUDA_STRING="12.9.1-base"
 ARG ROCM_STRING
 
 # Use build scripts to ensure we can build all targets from one Dockerfile in a single layer.
 # Don't put anything heavy in here - We can use multi-stage building above if necessary.
 #RUN yes | unminimize && \
-RUN set -eo pipefail && /opt/starforge-ai/bin/build/layer0/init.sh | tee /var/log/build.log
+RUN set -eo pipefail && /opt/ai-dock/bin/build/layer0/init.sh | tee /var/log/build.log
 
-# Keep init.sh as-is and place additional logic in /opt/starforge-ai/bin/preflight.d
+# Keep init.sh as-is and place additional logic in /opt/ai-dock/bin/preflight.d
 CMD ["init.sh"]

@@ -165,7 +165,7 @@ function init_count_quicktunnels() {
     if [[ ${CF_QUICK_TUNNELS,,} == "false" ]]; then
         export CF_QUICK_TUNNELS_COUNT=0
     else
-        export CF_QUICK_TUNNELS_COUNT=$(grep -l "QUICKTUNNELS=true" /opt/starforge-ai/bin/supervisor-*.sh | wc -l)
+        export CF_QUICK_TUNNELS_COUNT=$(grep -l "QUICKTUNNELS=true" /opt/ai-dock/bin/supervisor-*.sh | wc -l)
         if [[ -z $TUNNEL_TRANSPORT_PROTOCOL ]]; then
             export TUNNEL_TRANSPORT_PROTOCOL=http2
         fi
@@ -381,16 +381,16 @@ function init_create_logfiles() {
 }
 
 function init_source_preflight_scripts() {
-    preflight_dir="/opt/starforge-ai/bin/preflight.d"
+    preflight_dir="/opt/ai-dock/bin/preflight.d"
     printf "Looking for scripts in %s...\n" "$preflight_dir"
-    for script in /opt/starforge-ai/bin/preflight.d/*.sh; do
+    for script in /opt/ai-dock/bin/preflight.d/*.sh; do
         source "$script";
     done
 }
 
 function init_write_environment() {
     # Ensure all variables available for interactive sessions
-    sed -i '7,$d' /opt/starforge-ai/etc/environment.sh
+    sed -i '7,$d' /opt/ai-dock/etc/environment.sh
     while IFS='=' read -r -d '' key val; do
         if [[  $key != "HOME" ]]; then
             env-store "$key"
@@ -400,7 +400,7 @@ function init_write_environment() {
     if [[ ! $(grep "# First init complete" /root/.bashrc) ]]; then
         printf "# First init complete\n" >> /root/.bashrc
         printf "umask 002\n" >> /root/.bashrc
-        printf "source /opt/starforge-ai/etc/environment.sh\n" >> /root/.bashrc
+        printf "source /opt/ai-dock/etc/environment.sh\n" >> /root/.bashrc
         printf "nvm use default > /dev/null 2>&1\n" >> /root/.bashrc
 
         if [[ -n $PYTHON_DEFAULT_VENV ]]; then
@@ -419,7 +419,7 @@ function init_write_environment() {
 function init_get_provisioning_script() {
     printf "Provisioning start: %s\n" "$(date +"%x %T.%3N")" >> /var/log/timing_data
     if [[ -n  $PROVISIONING_SCRIPT ]]; then
-        file="/opt/starforge-ai/bin/provisioning.sh"
+        file="/opt/ai-dock/bin/provisioning.sh"
         curl -L -o ${file} ${PROVISIONING_SCRIPT}
         if [[ "$?" -eq 0 ]]; then
             dos2unix "$file"
@@ -435,7 +435,7 @@ function init_get_provisioning_script() {
 function init_run_provisioning_script() {
     # Provisioning script should create the lock file if it wants to only run once
     if [[ ! -e "$WORKSPACE"/.update_lock ]]; then
-        file="/opt/starforge-ai/bin/provisioning.sh"
+        file="/opt/ai-dock/bin/provisioning.sh"
         printf "Looking for provisioning.sh...\n"
         if [[ ! -f ${file} ]]; then
             printf "Not found\n"
@@ -473,8 +473,8 @@ function init_debug_print() {
         printf "authorized_keys...\n\n"
         cat /root/.ssh/authorized_keys
         printf "\n--------------------------------------------\n"
-        printf "/opt/starforge-ai/etc/environment.sh...\n\n"
-        cat /opt/starforge-ai/etc/environment.sh
+        printf "/opt/ai-dock/etc/environment.sh...\n\n"
+        cat /opt/ai-dock/etc/environment.sh
         printf "\n--------------------------------------------\n"
         printf ".bashrc...\n\n"
         cat /root/.bashrc
@@ -484,7 +484,7 @@ function init_debug_print() {
 
 printf "Init started: %s\n" "$(date +"%x %T.%3N")" > /var/log/timing_data
 umask 002
-source /opt/starforge-ai/etc/environment.sh
+source /opt/ai-dock/etc/environment.sh
 ldconfig
 
 init_main "$@"; exit

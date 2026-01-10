@@ -88,6 +88,9 @@ jobs:
           - { latest: "false", cuda: "13.0.2-base" }
           - { latest: "false", cuda: "13.0.2-cudnn-runtime" }
           - { latest: "false", cuda: "13.0.2-cudnn-devel" }
+          - { latest: "false", cuda: "12.9.1-base" }
+          - { latest: "false", cuda: "12.9.1-cudnn-runtime" }
+          - { latest: "false", cuda: "12.9.1-cudnn-devel" }
         
     steps:
       - name: Free Space

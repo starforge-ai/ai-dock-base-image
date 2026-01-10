@@ -1,7 +1,7 @@
-[1mdiff --git a/build/COPY_ROOT_0/opt/starforge-ai/bin/direct-url.sh b/build/COPY_ROOT_0/opt/starforge-ai/bin/direct-url.sh[m
+[1mdiff --git a/build/COPY_ROOT_0/opt/ai-dock/bin/direct-url.sh b/build/COPY_ROOT_0/opt/ai-dock/bin/direct-url.sh[m
 [1mindex 3404cbb..0f09dc4 100755[m
-[1m--- a/build/COPY_ROOT_0/opt/starforge-ai/bin/direct-url.sh[m
-[1m+++ b/build/COPY_ROOT_0/opt/starforge-ai/bin/direct-url.sh[m
+[1m--- a/build/COPY_ROOT_0/opt/ai-dock/bin/direct-url.sh[m
+[1m+++ b/build/COPY_ROOT_0/opt/ai-dock/bin/direct-url.sh[m
 [36m@@ -23,6 +23,14 @@[m [mif [[ -z $port ]]; then[m
      exit 1[m
  fi[m

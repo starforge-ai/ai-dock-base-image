@@ -7,7 +7,7 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     
     printf "Starting logtail service...\n"
     sleep 2

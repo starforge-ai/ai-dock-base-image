@@ -10,7 +10,7 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     
     if [[ -z $CF_TUNNEL_TOKEN ]]; then
         printf "Skipping Cloudflare daemon: No token\n"

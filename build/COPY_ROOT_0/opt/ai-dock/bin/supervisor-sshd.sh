@@ -8,7 +8,7 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     
     ak_file="/root/.ssh/authorized_keys"
     if [[ ! $(ssh-keygen -l -f $ak_file) ]]; then

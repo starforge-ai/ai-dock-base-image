@@ -26,7 +26,7 @@ parser.add_argument("-u", "--urlslug", action="store", help="image slug", type=s
 args = parser.parse_args()
 
 # set path and log file name
-base_dir = "/opt/starforge-ai/fastapi/logviewer/"
+base_dir = "/opt/ai-dock/fastapi/logviewer/"
 
 # create fastapi instance
 app = FastAPI()

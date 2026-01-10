@@ -20,8 +20,8 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
-    source /opt/starforge-ai/bin/venv-set.sh serviceportal
+    source /opt/ai-dock/etc/environment.sh
+    source /opt/ai-dock/bin/venv-set.sh serviceportal
     
     file_content="$(
       jq --null-input \
@@ -41,7 +41,7 @@ function start() {
     wait -n
     
     source "$SERVICEPORTAL_VENV/bin/activate"
-    cd /opt/starforge-ai/fastapi/serviceportal
+    cd /opt/ai-dock/fastapi/serviceportal
     python main.py \
         -p $LISTEN_PORT
 }

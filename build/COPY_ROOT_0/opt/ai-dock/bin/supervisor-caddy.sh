@@ -8,7 +8,7 @@ function cleanup() {
 
 function start() {
     rm -f /tmp/external_ip_address
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     # Give processes time to register their ports
     sleep 2
 

@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description="Require port and service name",
 parser.add_argument("-p", "--port", action="store", help="listen port", required="True", type=int)
 args = parser.parse_args()
 
-base_dir = "/opt/starforge-ai/fastapi/serviceportal/"
+base_dir = "/opt/ai-dock/fastapi/serviceportal/"
 
 app = FastAPI()
 

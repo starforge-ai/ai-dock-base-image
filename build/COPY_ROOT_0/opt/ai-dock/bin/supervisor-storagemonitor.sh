@@ -7,7 +7,7 @@ function cleanup() {
 }
 
 function start() {
-    source /opt/starforge-ai/etc/environment.sh
+    source /opt/ai-dock/etc/environment.sh
     
     if [[ -f /run/workspace_sync ]]; then
         printf "Waiting for workspace sync to complete...\n"
@@ -17,7 +17,7 @@ function start() {
     fi
 
     printf "Starting storage monitor..\n"
-    /opt/starforge-ai/storage_monitor/bin/storage-monitor.sh
+    /opt/ai-dock/storage_monitor/bin/storage-monitor.sh
 }
 
 start 2>&1
