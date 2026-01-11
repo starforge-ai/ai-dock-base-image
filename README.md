@@ -6,11 +6,14 @@ All ai-dock images are extended from this base image.
 
 This file should form the basis for the README.md for all extended images, with nothing but this introduction removed and additional features documented as required.
 
+## Disclaimer
+This is a fork of [ai-dock's base-image](https://github.com/ai-dock/base-image). The purpose of this repo is to update to the latest versions of Cuda(12.9.1,13.0.2), Python(3.11), ROCM(7.0.3), and Ubuntu(24.04). I have only tested the Cuda 13.02 version, if you try any of the other versions, please let me know.   
+
 ## Documentation
 
 All AI-Dock containers share a common base which is designed to make running on container-first cloud services such as [vast.ai](https://link.ai-dock.org/vast.ai) as straightforward and user friendly as possible.
 
-Common features and options are documented in the [base wiki](https://github.com/starforge-ai/base-image/wiki) but any additional features unique to this image will be detailed below.
+Common features and options are documented in the [base wiki](https://github.com/ai-dock/base-image/wiki) but any additional features unique to this image will be detailed below.
 
 ## Pre-built Images
 
@@ -32,7 +35,7 @@ ROCm builds are experimental. Please give feedback.
 ##### _CPU_
 `:v2-cpu-[ubuntu-version]`
 
-Browse [here](https://github.com/starforge-ai/base-image/pkgs/container/base-image) for an image suitable for your target environment.
+Browse [here](https://github.com/orgs/starforge-ai/packages/container/package/ai-dock-base-image) for an image suitable for your target environment.
 
 ---
 
