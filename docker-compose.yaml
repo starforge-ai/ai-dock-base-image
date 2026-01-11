@@ -11,9 +11,9 @@ services:
         CUDA_STRING: ${CUDA_STRING:-13.0.2-base}
         ROCM_STRING: ${ROCM_STRING:-7.0.3-runtime}
       tags:
-        - "ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}"
+        - "ghcr.io/starforge-ai/ai-dock-base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}"
 
-    image: ghcr.io/starforge-ai/base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}
+    image: ghcr.io/starforge-ai/ai-dock-base-image:${IMAGE_TAG:-v2-cuda-13.0.2-base-24.04}
 
     ## For Nvidia GPU's - You probably want to uncomment this
     #deploy:
@@ -72,4 +72,4 @@ services:
       - SERVICEPORTAL_PORT_HOST=${SERVICEPORTAL_PORT_HOST:-1111}
       - SERVICEPORTAL_METRICS_PORT=${SERVICEPORTAL_METRICS_PORT:-21111}
       - SERVICEPORTAL_URL=${SERVICEPORTAL_URL:-}
-      #- PROVISIONING_SCRIPT=https://raw.githubusercontent.com/starforge-ai/base-image/main/config/provisioning/default.sh
+      #- PROVISIONING_SCRIPT=https://raw.githubusercontent.com/starforge-ai/ai-dock-base-image/main/config/provisioning/default.sh

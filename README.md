@@ -1,4 +1,4 @@
-[![Docker Build](https://github.com/starforge-ai/base-image/actions/workflows/docker-build.yml/badge.svg)](https://github.com/starforge-ai/base-image/actions/workflows/docker-build.yml)
+[![Docker Build](https://github.com/starforge-ai/ai-dock-base-image/actions/workflows/docker-build.yml/badge.svg)](https://github.com/starforge-ai/ai-dock-base-image/actions/workflows/docker-build.yml)
 
 # Base Image
 
