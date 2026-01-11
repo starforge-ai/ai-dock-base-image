@@ -38,7 +38,7 @@ ENV XPU_TARGET=${XPU_TARGET}
 ARG NODE_VERSION=v25.2.1
 ENV NODE_VERSION=${NODE_VERSION}
 
-LABEL org.opencontainers.image.source=https://github.com/starforge-ai/base-image
+LABEL org.opencontainers.image.source=https://github.com/starforge-ai/ai-dock-base-image
 
 LABEL org.opencontainers.image.description="Base image for ai-dock."
 
